@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="org.kkamnyang.persistence.EventMapper">
+
+ 	<insert id="create">
+ 		insert into tbl_event(routeno,title,content,lat,lng,img,video,camera,camMessage,eorder)
+ 		 values
+ 		 (#{routeno},#{title},#{content},#{lat},#{lng},#{img},#{video},#{camera},#{camMessage},#{eorder})
+ 	</insert>
+ 	
+ 	<select id="list" resultType="org.kkamnyang.domain.EventVO">
+ 		select * from tbl_event 
+ 	</select>
+ 	
+ 	<select id="elist" resultType="org.kkamnyang.domain.EventVO">
+ 		select * from tbl_event where routeno=#{routeno}
+ 	</select>
+ 	
+ 	<select id="read" resultType="org.kkamnyang.domain.EventVO">
+ 		select * from tbl_event where eventno = #{eventno}
+ 	</select>
+ 	
+ 	<update id="update">
+ 		update tbl_event set title=#{title},content=#{content}, lat=#{lat}, lng=#{lng},
+ 		img=#{img},video=#{video},camera=#{camera},camMessage=#{camMessage},eorder=#{eorder} 
+ 		where eventno = #{eventno}
+ 	</update>
+ 	
+ 	<delete id="delete">
+ 		delete from tbl_event where eventno = #{eventno}
+ 	</delete>
+ 	
+ 	
+ 	<insert id="addAttach">
+		insert into tbl_eattach(efullName,eventNo)
+		values(#{efiles},LAST_INSERT_ID())
+	</insert>
+
+	<select id="getAttach" resultType="string">
+		select efullname from tbl_eattach where eventNo=#{eventno} order by regdate
+	</select>
+
+	<update id="updateAttach">
+		update tbl_eattach set efullName=#{efiles},eventNo=#{eventno} where eventno=#{eventno}
+	</update>
+
+ </mapper>

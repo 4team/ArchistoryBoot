@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.kkamnyang.mapper.BoardMapper">
+
+ <insert id="create">
+ insert into tbl_board (title, content, writer) 
+ values(#{title},#{content}, #{writer})
+ </insert>
+
+ <select id="read" resultType="org.kkamnyang.domain.BoardVO">
+ select 
+   boardNo, title, content, writer, regdate, vcount,lcount 
+ from 
+   tbl_board 
+ where boardNo = #{boardNo}
+ </select>
+
+ <update id="update">
+ update tbl_board set title =#{title}, content =#{content} 
+ where boardNo = #{boardNo}
+ </update>
+
+ <delete id="delete">
+ delete from tbl_board where boardNo = #{boardNo}
+ </delete>
+
+ <select id="listAll" resultType="org.kkamnyang.domain.BoardVO">
+ <![CDATA[
+ select 
+   boardNo, title, content, writer, regdate, vcount
+ from 
+   tbl_board 
+ where boardNo > 0 
+ order by boardNo desc, regdate desc
+ ]]>  
+ </select>
+ 
+ <select id="listPage" resultType="org.kkamnyang.domain.BoardVO">
+ <![CDATA[
+ select 
+   boardNo, title, content, writer, regdate, vcount 
+ from 
+   tbl_board 
+ where boardNo > 0 
+ order by boardNo desc, regdate desc
+ limit #{page}, 10
+ ]]>  
+ </select>
+
+<!--   <select id="listCriteria" resultType="BoardVO">
+ <![CDATA[
+ select 
+   boardNo, title, content, writer, regdate, viewcnt 
+ from 
+   tbl_board 
+ where boardNo > 0 
+ order by boardNo desc, regdate desc
+ limit #{pageStart}, #{perPageNum}
+ ]]>  
+ </select>
+ -->
+
+
+ <select id="countPaging" resultType="int">
+ <![CDATA[
+ select 
+   count(boardNo) 
+ from 
+   tbl_board 
+ where 
+   boardNo > 0 
+ ]]>
+ </select>
+
+
+
+<sql id="search">
+ <if test="searchType != null" > 
+   <if test="searchType == 't'.toString()">
+     and title like CONCAT('%', #{keyword}, '%')
+   </if>
+   <if test="searchType == 'c'.toString()">
+     and content like CONCAT('%', #{keyword}, '%')
+   </if>
+   <if test="searchType == 'w'.toString()">
+     and writer like CONCAT('%', #{keyword}, '%')
+   </if>     
+   <if test="searchType == 'tc'.toString()">
+     and ( title like CONCAT('%', #{keyword}, '%') OR content like CONCAT('%', #{keyword}, '%'))
+   </if>        
+   <if test="searchType == 'cw'.toString()">
+     and ( content like CONCAT('%', #{keyword}, '%') OR writer like CONCAT('%', #{keyword}, '%'))
+   </if>        
+   <if test="searchType == 'tcw'.toString()">
+     and (   title like CONCAT('%', #{keyword}, '%') 
+           OR 
+             content like CONCAT('%', #{keyword}, '%') 
+           OR 
+             writer like CONCAT('%', #{keyword}, '%'))
+   </if>              
+ </if>  
+</sql>
+ 
+   <select id="listSearch" parameterType="criteria" resultType="org.kkamnyang.domain.BoardVO">
+	<![CDATA[  
+	  select * 
+	  from tbl_board 
+	  where boardNo > 0 
+	]]>  
+	  <include refid="search"></include>	 
+	  order by boardNo desc
+	  limit #{pageStart},#{perPageNum}	 
+   </select>
+
+  
+	<select id="listSearchCount" parameterType="criteria" resultType="int">
+	<![CDATA[  
+	  select count(boardNo) 
+	  from tbl_board 
+	  where boardNo > 0 
+	]]>
+	  <include refid="search"></include>
+	</select>
+	
+	<update id="updateReplyCnt">
+	update tbl_board set replycnt=replycnt+#{amount} where boardNo=#{boardNo}
+	</update>
+
+	<update id="updateViewCnt">
+		update tbl_board set vcount=vcount+1 where boardNO=#{boardNo}
+	</update>
+	  
+  	<insert id="addAttach">
+		insert into tbl_attach(fullName,boardNo)
+		values(#{fullName},LAST_INSERT_ID())
+	</insert>
+	
+	<select id="getAttach" resultType="string">
+	select fullname from tbl_attach where boardNo=#{boardNo} order by regdate
+	</select>
+	
+  
+  <delete id="deleteAttach">
+  delete from tbl_attach where boardNo=#{boardNo}
+  </delete>
+  
+  <insert id="replaceAttach">
+  insert into tbl_attach(fullname,boardNo)values (#{fullname},#{boardNo})
+  </insert>
+  
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "org.kkamnyang.mapper.Replymapper">
+
+<select id="list" resultType="ReplyVO">
+select * from tbl_reply where boardNo = #{boardNo} order by replyNo desc
+</select>
+
+<insert id="create">
+insert into tbl_reply(boardNo, content, writer)
+values(#{boardNo}, #{content}, #{writer})
+</insert>
+
+<update id="update">
+update TBL_REPLY 
+set content = #{content}, updatedate=sysdate 
+where replyNo = #{replyNo}
+</update>
+
+<delete id="delete">
+delete from tbl_reply where replyNo = #{replyNo}
+</delete>
+
+<select id="listPage" parameterType="int" resultType="org.kkamnyang.domain.ReplyVO">
+select
+		*
+		from
+		tbl_reply
+		where
+		boardNo = #{boardNo}
+		order by replyNo desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+</select>
+
+<select id="count" resultType="int">
+select count(boardNo) from tbl_reply where boardNo=#{boardNo}
+</select>
+
+<select id="getBoardNo" resultType="int">
+select boardNo from tbl_reply where replyNo = #{replyNo}
+</select>
+
+</mapper>

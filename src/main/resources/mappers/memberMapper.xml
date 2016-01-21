@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.kkamnyang.persistence.MemberMapper">
+	<insert id="create">
+		insert into tbl_member(userNo,userName,email,mPassword)
+        values(#{userNo},#{userName},#{email},#{mPassword})
+	</insert>
+	
+	<select id="list" resultType="org.kkamnyang.domain.MemberVO">
+		select * from tbl_member
+	</select>
+	
+	<select id="read" resultType="org.kkamnyang.domain.MemberVO">
+		select * from tbl_member where memberNo = #{memberNo}
+	</select>
+
+	<update id="update">
+		update tbl_member set userNo=#{userNo},userName=#{userName},email=#{email},mPassword=#{mPassword},img=#{img}
+		where memberNo=#{memberNo}
+	</update>
+	
+	<delete id="delete">
+		delete from tbl_member where memberNo=#{memberNo}
+	</delete>
+	
+	<select id="getUser">
+		select * from tbl_member where email = #{email}
+	</select>
+	
+</mapper>

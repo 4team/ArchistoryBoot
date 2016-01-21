@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.kkamnyang.persistence.AdminMapper">
+	<insert id="create">
+ 		insert into tbl_admin(email,password,username,phone,nation,img) 
+ 		values(#{email},#{password},#{username},#{phone},#{nation},#{img})
+ 	</insert>
+ 	
+ 	<select id="list" resultType="org.kkamnyang.domain.AdminVO">
+ 		select * from tbl_admin
+ 	</select>
+ 	
+ 	<select id="read" resultType="org.kkamnyang.domain.AdminVO">
+ 		select * from tbl_admin where adminno = #{adminno}
+ 	</select>
+ 	
+ 	<update id="update">
+ 		update tbl_admin set password = #{password}, username = #{username}, phone = #{phone}, nation=#{nation} 
+ 		where adminno = #{adminno}
+ 	</update>
+ 	
+ 	<delete id="delete">
+ 		delete from tbl_admin where adminno = #{adminno}
+ 	</delete>
+  
+  	<select id="login" resultType="org.kkamnyang.domain.AdminVO">
+  		select * from tbl_admin where email = #{email} and password = #{password}
+  	</select>
+  	
+  	<select id="getPass" resultType="java.lang.String" parameterType="java.lang.String">
+  		select password from tbl_admin where email = #{email}
+  	</select>
+  
+  	<select id="getName" resultType="java.lang.String" parameterType="java.lang.String">
+  		select username from tbl_admin where email = #{email}
+  	</select>
+  	
+  	<select id="getNo" resultType="int" parameterType="java.lang.String">
+  		select adminno from tbl_admin where email = #{email}
+  	</select>
+  	
+  	<select id="isEnable" resultType="java.lang.Boolean" parameterType="java.lang.String">
+  		select enabled from tbl_admin where email = #{email}
+  	</select>
+  	
+</mapper>
