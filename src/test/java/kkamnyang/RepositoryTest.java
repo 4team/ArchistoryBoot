@@ -12,22 +12,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import kkamnyang.repository.RouteRepository;
-
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = {RepositoryConfiguration.class})
+@SpringApplicationConfiguration(classes = {BootArchistoryApplication.class})
 @WebAppConfiguration
 @IntegrationTest
 public class RepositoryTest {
 
-	@Autowired
-	private RouteRepository rrep;
-	
-	@Autowired
-	public void setRouteRepository(RouteRepository route){
-		this.rrep = route;
-	}
 	
 	
 	@Autowired
@@ -43,8 +34,6 @@ public class RepositoryTest {
 	@Test
 	public void test() {
 		
-		boolean vo = rrep.exists(56);
-		System.out.println(vo);
 		
 	}
 
