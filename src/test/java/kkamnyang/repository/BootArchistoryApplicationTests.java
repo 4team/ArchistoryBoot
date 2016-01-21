@@ -1,4 +1,4 @@
-package org.kkamnyang.web;
+package kkamnyang.repository;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,9 +1,15 @@
 package kkamnyang.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class RouteVO {
+import javax.persistence.*;
+
+@Entity
+public class RouteVO implements Serializable{
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer routeno;
 	private Integer adminno;
 	private String routename;
