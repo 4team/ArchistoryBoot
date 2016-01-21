@@ -9,8 +9,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableAutoConfiguration
 @EntityScan(basePackages={"kkamnyang.domain"})
-@EnableJpaRepositories(basePackages = {"kkamnyang.persistence"})
+@EnableJpaRepositories(basePackages = {"kkamnyang.repository"})
 @EnableTransactionManagement
 public class RepositoryConfiguration {
 
+
+	
+	
 }
