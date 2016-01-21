@@ -16,7 +16,7 @@ import kkamnyang.repository.RouteRepository;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = {BootArchistoryApplication.class})
+@SpringApplicationConfiguration(classes = {RepositoryConfiguration.class})
 @WebAppConfiguration
 @IntegrationTest
 public class RepositoryTest {
