@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Entity
+@Table(name="tbl_route")
 public class RouteVO implements Serializable{
 	
 	@Id

@@ -1,25 +1,44 @@
 package kkamnyang;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.data.repository.config.RepositoryConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import kkamnyang.repository.RouteRepository;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = {RepositoryConfiguration.class})
+@SpringApplicationConfiguration(classes = {BootArchistoryApplication.class})
+@WebAppConfiguration
+@IntegrationTest
 public class RepositoryTest {
 
+	@Autowired
 	private RouteRepository rrep;
 	
 	@Autowired
 	public void setRouteRepository(RouteRepository route){
 		this.rrep = route;
 	}
+	
+	
+	@Autowired
+    private WebApplicationContext wac;
+
+    private MockMvc mockMvc;
+    
+    @Before
+    public void setup() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+    }
 	
 	@Test
 	public void test() {
