@@ -15,7 +15,7 @@ public interface RouteMapper {
 	public int create(RouteVO vo) throws Exception;
 	
 	@Select("select * from tbl_route")
-	public List<RouteVO> list() throws Exception;
+	public List<RouteVO> listAll() throws Exception;
 	
 	@Select("select * from tbl_route where adminno = #{adminno}")
 	public List<RouteVO> list(Integer adminno) throws Exception;

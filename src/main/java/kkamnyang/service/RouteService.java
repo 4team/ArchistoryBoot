@@ -15,7 +15,7 @@ public class RouteService {
 	RouteMapper mapper;
 	
 	public List<RouteVO> listAll() throws Exception{
-		return mapper.list();
+		return mapper.listAll();
 	}
 	
 	public List<RouteVO> list(int adminno) throws Exception{

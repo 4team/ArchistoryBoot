@@ -46,7 +46,7 @@ public class RepositoryTest {
 	
 	@Test
 	public void routeTest() throws Exception{
-		System.out.println(mapper.list());
+		System.out.println(mapper.listAll());
 	}
 	
 	@Test
