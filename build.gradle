@@ -35,7 +35,8 @@ configurations {
 dependencies { 
 	//Basic
 	compile("org.springframework.boot:spring-boot-starter-web") 
-	providedRuntime("tomcat:jasper-runtime:5.5.23")
+	compile('tomcat:jasper-compiler:5.5.23')
+	compile('javax.servlet:javax.servlet-api:3.1.0')
 	compile("javax.servlet:jstl:1.2")
 	compile('javax.persistence:persistence-api:1.0.2')
 	compile('org.freemarker:freemarker:2.3.23')
