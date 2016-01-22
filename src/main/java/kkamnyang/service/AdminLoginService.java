@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import kkamnyang.persistence.AdminDetails;
 import kkamnyang.persistence.AdminMapper;
 
-@Service
+@Service("adminLoginService")
 public class AdminLoginService implements UserDetailsService{
 
 	@Autowired
@@ -30,7 +30,7 @@ public class AdminLoginService implements UserDetailsService{
 		AdminDetails admin = null;
 		
 		StandardPasswordEncoder encoder = new StandardPasswordEncoder();
-		System.out.println("[ADMIN ë¡œê·¸?¸ ?‹œ?„] - loadUserByUsername");
+		System.out.println("[ADMIN ë¡œê·¸?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½] - loadUserByUsername");
 		
 		try {
 			int adminno = mapper.getNo(useremail);
@@ -44,7 +44,7 @@ public class AdminLoginService implements UserDetailsService{
 			roles.add(new SimpleGrantedAuthority("ROLE_USER"));
 			admin = new AdminDetails(adminno,useremail,name,encoder.encode(password));
 		} catch (Exception e) {
-			System.out.println("ê³„ì •?´ ?—†?Š” ADMIN?˜ ë¡œê·¸?¸ ?‹œ?„... LoginService(loadUserByUserName");
+			System.out.println("ê³„ì •?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ADMIN?ï¿½ï¿½ ë¡œê·¸?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½... LoginService(loadUserByUserName");
 			return null;
 		}
 		
@@ -54,13 +54,13 @@ public class AdminLoginService implements UserDetailsService{
 			enable = mapper.isEnable(useremail);
 			
 			if(enable == false){
-				System.out.println("?´?š©?´ ë§‰íŒ ?‚¬?š©?ê°? ë¡œê·¸?¸?•˜???‹¤.");
+				System.out.println("?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ë§‰íŒ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½? ë¡œê·¸?ï¿½ï¿½?ï¿½ï¿½???ï¿½ï¿½.");
 				return null;
 			}
 			
 			
 		} catch (Exception e) {
-			System.out.println("enableê°?? ¸?˜¤?Š”?° ?‹¤?Œ¨ ");
+			System.out.println("enableï¿½??ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ");
 			e.printStackTrace();
 		}
 		

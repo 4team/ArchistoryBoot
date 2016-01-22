@@ -4,11 +4,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import kkamnyang.domain.AdminDTO;
@@ -16,7 +16,8 @@ import kkamnyang.domain.AdminVO;
 import kkamnyang.persistence.AdminDetails;
 import kkamnyang.service.AdminService;
 
-@Controller
+@RestController
+@RequestMapping("/admin/*")
 public class AdminController {
 
 	@Autowired
@@ -27,19 +28,19 @@ public class AdminController {
         return (AdminDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 	
-	@RequestMapping("/admin/login")
+	@RequestMapping("/login")
 	public void adminLogin() {
 	        System.out.println("로그인이 호출되어 /admin/login.jsp를 보낸다.");
 	}
 	
-	@RequestMapping(value = "/admin/logout",method=RequestMethod.GET)
+	@RequestMapping(value = "/logout",method=RequestMethod.GET)
 	public void adminLogout() {
 		
 		System.out.println("로그?��?��?��?�� /admin/logout.jsp�? 보낸?��.");
 		
 	}
 	
-	@RequestMapping(value="/admin/login", method = RequestMethod.POST)
+	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public void login(@RequestBody AdminDTO dto, HttpSession session, Model model) throws Exception{
 		System.out.println("로그인 처리 POST호출됨==================");
 		AdminVO vo = service.login(dto);
@@ -54,7 +55,7 @@ public class AdminController {
 
 	}
 	
-	@RequestMapping(value = "/admin/login_success",method=RequestMethod.GET)
+	@RequestMapping(value = "/login_success",method=RequestMethod.GET)
 	public ModelAndView adminSuccess(Model model) {
 		System.out.println("로그인에 성공하였다.");
 		ModelAndView view = new ModelAndView();
