@@ -383,6 +383,7 @@
     <!-- 이벤트 리스트 수정 버튼 -->
     $("#eventList").on("click","#modi",function(event){
         var select = $(this);
+        clearEventDiv();
         viewEvent(select.attr("value"));
         $("#modiModal").modal('show');
     });
@@ -727,17 +728,10 @@
         var that = $(this);
         console.log("delete click");
         
-       /*  (function(attach, that) {
-                    var targetIndex = 0;
-                    console.log("attach?:" + attach);
-                    for(var i = 0; i < attach.length; i++) {
-                        if(attach[i] === that) {
-                            targetIndex = i;
-                        }
-                    }
-                    attach.splice(targetIndex,1);
-                    return attach;
-                })(); */
+        var index = $.inArray($(this).attr("data-src"), attach);
+        attach.splice(index, 1);
+        console.log("삭제 한 뒤의 어테치 : "+attach);
+
         
         $.ajax({
             url:"http://192.168.0.36:8080/sboard/deleteFile",
@@ -750,6 +744,7 @@
                 }
             }
         });
+                
     });
 
 
