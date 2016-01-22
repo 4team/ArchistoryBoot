@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import kkamnyang.persistence.EventMapper;
 import kkamnyang.persistence.RouteMapper;
+import kkamnyang.service.EventService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,7 +30,7 @@ public class RepositoryTest {
 	   
 	   
 	   @Autowired
-	   EventMapper service;
+	   EventService service;
 	
 	@Test
 	public void test() throws Exception{
