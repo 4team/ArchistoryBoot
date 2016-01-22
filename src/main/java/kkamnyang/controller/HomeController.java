@@ -10,13 +10,8 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String welcome(Map<String, Object> model) {
-		System.out.println("¡ÚHome Controller...");
+		System.out.println("Home Controller...");
 		return "home";
-	}
-
-	@RequestMapping("/foo")
-	public String foo(Map<String, Object> model) {
-		throw new RuntimeException("Foo");
 	}
 
 }
