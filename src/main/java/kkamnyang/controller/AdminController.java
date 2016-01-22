@@ -17,7 +17,7 @@ import kkamnyang.persistence.AdminDetails;
 import kkamnyang.service.AdminService;
 
 @Controller
-@RequestMapping(value="/admin/*")
+@RequestMapping("/admin/*")
 public class AdminController {
 
 	@Autowired
@@ -30,34 +30,34 @@ public class AdminController {
 	
 	@RequestMapping(value = "/login",method=RequestMethod.GET)
 	public void adminLogin() {
-	        System.out.println("ë¡œê·¸?¸?™”ë©´ì´ ?˜¸ì¶œë˜?–´ /admin/login.jspë¥? ë³´ë‚¸?‹¤.");
+	        System.out.println("ë¡œê·¸?ï¿½ï¿½?ï¿½ï¿½ë©´ì´ ?ï¿½ï¿½ì¶œë˜?ï¿½ï¿½ /admin/login.jspï¿½? ë³´ë‚¸?ï¿½ï¿½.");
 	}
 	
 	@RequestMapping(value = "/logout",method=RequestMethod.GET)
 	public void adminLogout() {
 		
-		System.out.println("ë¡œê·¸?•„?›ƒ?•˜?—¬ /admin/logout.jspë¥? ë³´ë‚¸?‹¤.");
+		System.out.println("ë¡œê·¸?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ /admin/logout.jspï¿½? ë³´ë‚¸?ï¿½ï¿½.");
 		
 	}
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public void login(@RequestBody AdminDTO dto, HttpSession session, Model model) throws Exception{
-		System.out.println("?ˆ„êµ°ê??˜ ë¡œê·¸?¸ ?‹œ?„==================");
+		System.out.println("?ï¿½ï¿½êµ°ï¿½??ï¿½ï¿½ ë¡œê·¸?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½==================");
 		AdminVO vo = service.login(dto);
 
 		if(vo != null){
-			System.out.println("["+vo.getUsername() + "] Admin?´ ë¡œê·¸?¸ ?•˜???‹¤.");
+			System.out.println("["+vo.getUsername() + "] Admin?ï¿½ï¿½ ë¡œê·¸?ï¿½ï¿½ ?ï¿½ï¿½???ï¿½ï¿½.");
 			session.setAttribute("LOGIN", vo);
 			model.addAttribute("adminVO",vo);
 		}else{
-			System.out.println("Adminê³„ì •?— ?—†?Š” ê²ŒìŠ¤?Š¸?˜ ë¡œê·¸?¸ ?‹œ?„???‹¤.");
+			System.out.println("Adminê³„ì •?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½ ê²ŒìŠ¤?ï¿½ï¿½?ï¿½ï¿½ ë¡œê·¸?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½???ï¿½ï¿½.");
 		}
 
 	}
 	
 	@RequestMapping(value = "/login_success",method=RequestMethod.GET)
 	public ModelAndView adminSuccess(Model model) {
-		System.out.println("ë¡œê·¸?¸?— ?„±ê³µí•˜?—¬ /login_success.jspë¥? ë³´ë‚¸?‹¤.");
+		System.out.println("ë¡œê·¸?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ê³µí•˜?ï¿½ï¿½ /login_success.jspï¿½? ë³´ë‚¸?ï¿½ï¿½.");
 		ModelAndView view = new ModelAndView();
 	    view.setViewName("admin");
 	    view.addObject("adminno", getUser().getAdminno());
