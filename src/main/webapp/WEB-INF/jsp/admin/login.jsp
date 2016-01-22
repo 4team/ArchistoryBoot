@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title> = ADMIN LOGIN =</title>
 </head>
 	<style>
@@ -44,21 +44,21 @@
 <div id="wrapper">
 <div id="contents">
 <form name="form1" method="post" action="/admin/login">
-<h2>·Î±×ÀÎ </h2>
+<h2>ë¡œê·¸ì¸ </h2>
 <table>
     <tr height="40px">
-        <td>À¯Àú Email</td>
+        <td>ìœ ì € Email</td>
         <td><input type="text" name="email"></td>
     </tr>
     <tr height="40px">
-        <td>ÆÐ½º¿öµå</td>
+        <td>íŒ¨ìŠ¤ì›Œë“œ</td>
         <td><input type="password" name="password"></td>
     </tr>
     <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 </table>
     <div id="button">
-     <input type="submit" value="·Î±×ÀÎ">
-     <input type="reset" value="¸®¼Â">
+     <input type="submit" value="ë¡œê·¸ì¸">
+     <input type="reset" value="ë¦¬ì…‹">
     </div>
 </form>
 </div>

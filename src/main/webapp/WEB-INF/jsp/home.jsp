@@ -1,11 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page session="false"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" charset=UTF-8">
+    <meta http-equiv="Content-Type"  charset=UTF-8">
     <title> = Archistory = </title>
 </head>
 
-    <style>
+    <style type="text/css">
         html, body {
             width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
             font-family: sans-serif; color: #edffff;
@@ -179,7 +184,7 @@
     
     <!-- Cesium -->
   	<link type="text/css" href="/Cesium/Build/Cesium/Widgets/widgets.css" rel="stylesheet"/>
-	<script src="/Cesium/Build/Cesium/Cesium.js"></script>
+	<script type="text/javascript" src="/Cesium/Build/Cesium/Cesium.js"></script>
 	
 <body>
 

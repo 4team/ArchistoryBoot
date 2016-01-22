@@ -36,25 +36,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setEncoding("UTF-8");
         filter.setForceEncoding(true);
         http.addFilterBefore(filter,CsrfFilter.class);
-        
-        http
-            .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                
-            .formLogin()
-                .loginPage("/")
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .loginProcessingUrl("/admin/login")
-                .failureUrl("/")
-                .defaultSuccessUrl("/admin/login_success", true)
-                .permitAll()
-                .and()
-                
-            .logout()
-                .permitAll();
+//        
+//        http
+//            .authorizeRequests()
+//                .antMatchers("/").permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                
+//            .formLogin()
+//                .loginPage("/")
+//                .usernameParameter("email")
+//                .passwordParameter("password")
+//                .loginProcessingUrl("/admin/login")
+//                .failureUrl("/")
+//                .defaultSuccessUrl("/admin/login_success", true)
+//                .permitAll()
+//                .and()
+//                
+//            .logout()
+//                .permitAll();
     }
 
     
