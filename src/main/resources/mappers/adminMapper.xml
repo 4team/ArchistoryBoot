@@ -3,17 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.kkamnyang.persistence.AdminMapper">
+<mapper namespace="kkamnyang.persistence.AdminMapper">
 	<insert id="create">
  		insert into tbl_admin(email,password,username,phone,nation,img) 
  		values(#{email},#{password},#{username},#{phone},#{nation},#{img})
  	</insert>
  	
- 	<select id="list" resultType="org.kkamnyang.domain.AdminVO">
+ 	<select id="list" resultType="kkamnyang.domain.AdminVO">
  		select * from tbl_admin
  	</select>
  	
- 	<select id="read" resultType="org.kkamnyang.domain.AdminVO">
+ 	<select id="read" resultType="kkamnyang.domain.AdminVO">
  		select * from tbl_admin where adminno = #{adminno}
  	</select>
  	
@@ -26,7 +26,7 @@
  		delete from tbl_admin where adminno = #{adminno}
  	</delete>
   
-  	<select id="login" resultType="org.kkamnyang.domain.AdminVO">
+  	<select id="login" resultType="kkamnyang.domain.AdminVO">
   		select * from tbl_admin where email = #{email} and password = #{password}
   	</select>
   	

@@ -1,7 +1,16 @@
 package kkamnyang.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="tbl_event")
 public class EventVO {
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer eventno;
 	private Integer routeno;
 	private String title;

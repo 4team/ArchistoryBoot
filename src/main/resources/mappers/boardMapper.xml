@@ -3,14 +3,14 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.kkamnyang.mapper.BoardMapper">
+<mapper namespace="kkamnyang.mapper.BoardMapper">
 
  <insert id="create">
  insert into tbl_board (title, content, writer) 
  values(#{title},#{content}, #{writer})
  </insert>
 
- <select id="read" resultType="org.kkamnyang.domain.BoardVO">
+ <select id="read" resultType="kkamnyang.domain.BoardVO">
  select 
    boardNo, title, content, writer, regdate, vcount,lcount 
  from 
@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  delete from tbl_board where boardNo = #{boardNo}
  </delete>
 
- <select id="listAll" resultType="org.kkamnyang.domain.BoardVO">
+ <select id="listAll" resultType="kkamnyang.domain.BoardVO">
  <![CDATA[
  select 
    boardNo, title, content, writer, regdate, vcount
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  ]]>  
  </select>
  
- <select id="listPage" resultType="org.kkamnyang.domain.BoardVO">
+ <select id="listPage" resultType="kkamnyang.domain.BoardVO">
  <![CDATA[
  select 
    boardNo, title, content, writer, regdate, vcount 
@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  ]]>  
  </select>
 
-<!--   <select id="listCriteria" resultType="BoardVO">
+<!--   <select id="listkkamnyang.domain.Criteria" resultType="BoardVO">
  <![CDATA[
  select 
    boardNo, title, content, writer, regdate, viewcnt 
@@ -104,7 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  </if>  
 </sql>
  
-   <select id="listSearch" parameterType="criteria" resultType="org.kkamnyang.domain.BoardVO">
+   <select id="listSearch" parameterType="kkamnyang.domain.Criteria" resultType="kkamnyang.domain.BoardVO">
 	<![CDATA[  
 	  select * 
 	  from tbl_board 
@@ -116,7 +116,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    </select>
 
   
-	<select id="listSearchCount" parameterType="criteria" resultType="int">
+	<select id="listSearchCount" parameterType="kkamnyang.domain.Criteria" resultType="int">
 	<![CDATA[  
 	  select count(boardNo) 
 	  from tbl_board 

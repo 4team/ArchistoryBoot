@@ -10,6 +10,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
 @EnableAutoConfiguration
@@ -22,6 +24,11 @@ public class BootArchistoryApplication {
 	public SqlSessionFactory sqlSessionFactory(DataSource datasource) throws Exception{
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 	      sqlSessionFactoryBean.setDataSource(datasource);
+	      
+	      Resource[] arrResource = new PathMatchingResourcePatternResolver()
+	              .getResources("classpath:mappers/*Mapper.xml");
+	        sqlSessionFactoryBean.setMapperLocations(arrResource);
+	      
 	      return sqlSessionFactoryBean.getObject();
 	}
 	

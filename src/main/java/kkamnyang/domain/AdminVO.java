@@ -2,7 +2,17 @@ package kkamnyang.domain;
 
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name="tbl_admin")
 public class AdminVO {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private java.lang.Integer adminno;
 	private java.lang.String email;
 	private java.lang.String password;

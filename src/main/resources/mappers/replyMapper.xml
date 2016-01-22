@@ -3,9 +3,9 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace = "org.kkamnyang.mapper.Replymapper">
+<mapper namespace = "kkamnyang.mapper.Replymapper">
 
-<select id="list" resultType="ReplyVO">
+<select id="list" resultType="kkamnyang.domain.ReplyVO">
 select * from tbl_reply where boardNo = #{boardNo} order by replyNo desc
 </select>
 
@@ -24,7 +24,7 @@ where replyNo = #{replyNo}
 delete from tbl_reply where replyNo = #{replyNo}
 </delete>
 
-<select id="listPage" parameterType="int" resultType="org.kkamnyang.domain.ReplyVO">
+<select id="listPage" parameterType="int" resultType="kkamnyang.domain.ReplyVO">
 select
 		*
 		from

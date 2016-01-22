@@ -1,5 +1,9 @@
 package kkamnyang.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+
 public class AdminDTO {
 	private java.lang.String email;
 	private java.lang.String password;

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import kkamnyang.persistence.EventMapper;
 import kkamnyang.persistence.RouteMapper;
 
 
@@ -27,6 +28,9 @@ public class RepositoryTest {
 	   @Autowired
 	   private SqlSessionFactory sqlSessionFactory;
 	   
+	   
+	   @Autowired
+	   EventMapper service;
 	
 	@Test
 	public void test() throws Exception{
@@ -43,5 +47,10 @@ public class RepositoryTest {
 	@Test
 	public void routeTest() throws Exception{
 		System.out.println(mapper.list());
+	}
+	
+	@Test
+	public void eventTest() throws Exception{
+		System.out.println(service.list());
 	}
 }

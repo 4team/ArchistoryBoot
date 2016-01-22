@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
- <mapper namespace="org.kkamnyang.persistence.EventMapper">
+ <mapper namespace="kkamnyang.persistence.EventMapper">
 
  	<insert id="create">
  		insert into tbl_event(routeno,title,content,lat,lng,img,video,camera,camMessage,eorder)
@@ -11,15 +11,15 @@
  		 (#{routeno},#{title},#{content},#{lat},#{lng},#{img},#{video},#{camera},#{camMessage},#{eorder})
  	</insert>
  	
- 	<select id="list" resultType="org.kkamnyang.domain.EventVO">
+ 	<select id="list" resultType="kkamnyang.domain.EventVO">
  		select * from tbl_event 
  	</select>
  	
- 	<select id="elist" resultType="org.kkamnyang.domain.EventVO">
+ 	<select id="elist" resultType="kkamnyang.domain.EventVO">
  		select * from tbl_event where routeno=#{routeno}
  	</select>
  	
- 	<select id="read" resultType="org.kkamnyang.domain.EventVO">
+ 	<select id="read" resultType="kkamnyang.domain.EventVO">
  		select * from tbl_event where eventno = #{eventno}
  	</select>
  	

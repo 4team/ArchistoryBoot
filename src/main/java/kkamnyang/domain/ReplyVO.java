@@ -2,8 +2,16 @@ package kkamnyang.domain;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name="tbl_reply")
 public class ReplyVO {
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer replyNo;
 	private Integer boardNo;
 	private String content;
