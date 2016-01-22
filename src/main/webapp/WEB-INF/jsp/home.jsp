@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>= Archistory =</title>
+    <title> = Archistory = </title>
 </head>
 
     <style>
