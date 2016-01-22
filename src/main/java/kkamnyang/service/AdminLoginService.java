@@ -8,6 +8,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +31,8 @@ public class AdminLoginService implements UserDetailsService{
 	
 		AdminDetails admin = null;
 		
-		StandardPasswordEncoder encoder = new StandardPasswordEncoder();
-		System.out.println("[ADMIN 로그?�� ?��?��] - loadUserByUsername");
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		System.out.println("[ADMIN 로그인] - loadUserByUsername");
 		
 		try {
 			int adminno = mapper.getNo(useremail);
@@ -41,10 +43,10 @@ public class AdminLoginService implements UserDetailsService{
 			
 			Collection<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
 			
-			roles.add(new SimpleGrantedAuthority("ROLE_USER"));
+			roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 			admin = new AdminDetails(adminno,useremail,name,encoder.encode(password));
 		} catch (Exception e) {
-			System.out.println("계정?�� ?��?�� ADMIN?�� 로그?�� ?��?��... LoginService(loadUserByUserName");
+			System.out.println("계정이 없는 ADMIN이 로그인하였다.... LoginService(loadUserByUserName");
 			return null;
 		}
 		
@@ -54,17 +56,15 @@ public class AdminLoginService implements UserDetailsService{
 			enable = mapper.isEnable(useremail);
 			
 			if(enable == false){
-				System.out.println("?��?��?�� 막힌 ?��?��?���? 로그?��?��???��.");
+				System.out.println("계정이용이 막힌 사용자가 로그인을 시도했었다.");
 				return null;
 			}
 			
 			
 		} catch (Exception e) {
-			System.out.println("enable�??��?��?��?�� ?��?�� ");
+			System.out.println("enabled 가져오는 데 실패 ");
 			e.printStackTrace();
 		}
-		
-		
 		
 		System.out.println("LoginService..."+admin);
 		return admin;

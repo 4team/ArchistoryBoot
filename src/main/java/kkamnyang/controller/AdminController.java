@@ -36,7 +36,7 @@ public class AdminController {
 	@RequestMapping(value = "/logout",method=RequestMethod.GET)
 	public void adminLogout() {
 		
-		System.out.println("로그?��?��?��?�� /admin/logout.jsp�? 보낸?��.");
+		System.out.println("로그아웃하여 첫 페이지로 보내야한다..");
 		
 	}
 	

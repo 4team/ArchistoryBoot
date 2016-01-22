@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #map{
+        width: 100%;
+        height: 100%;
+    }
+
+    #routeCreateDiv{
+        padding:10px;
+    }
+
+    .modal-title{
+        text-align: center;
+    }
+
+    .modal-dialog{
+        max-width:400px;
+    }
+
+</style>
+
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=66fca768fabb8a1e238c3ac76f9c9499"></script>
+<body>
+
+<div id="map"></div>
+
+<!-- 모달 팝업(step 선택 ) -->
+<div class="modal fade" id="stepModal" tabindex="-1" role="dialog" aria-labelledby="routeCreateModalLabel" aria-hidden="true" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="stepLabel">#1_STEP 선택 </h4>
+            </div>
+           <!--  <div class="modal-body">-->
+                <div id="nonstepMode" style="background-color:white; width:180px; height:180px; float:left; text-align: center; padding-top: 15px; padding-left:20px;" >
+                    <img src = "img/nonstep.png">
+                </div>
+
+                <div id="stepMode" style="background-color:white; width:180px; height:180px; float:left; text-align: center; padding-top: 15px; padding-left:20px;">
+                   <img src = "img/step.png">
+                </div>
+
+            <!-- </div>-->
+
+            <div class="modal-footer">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- 모달 팝업(루트 생성) -->
+<div class="modal fade" id="routeCreateModal" tabindex="-1" role="dialog" aria-labelledby="routeCreateModalLabel" aria-hidden="true" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="routeCreateModalLabel">루트 생성</h4>
+            </div>
+            <div class="modal-body">
+                <div id="routeCreateDiv" class="row">
+                    <label for="routename">루트명</label><span style="margin-left:290px;">비밀 <input type="checkbox" id="passwordCheck" value="option1"></span><br>
+                    <input type="text" class="form-control" id="routename" placeholder="루트명을 입력하세요">
+
+                    <span class="password" style="display: none;">
+                        <label for="password">비밀번호</label>
+                        <input type="text" class="form-control" id="password" placeholder="비밀번호를 입력하세요">
+                    </span>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+                <button type="button" id="routeCreateBtn" class="btn btn-primary">만들기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $("#map").css("width",$(window).width()); // 전체화면으로 띄우기.
+    $("#map").css("height",$(window).height()); // 전체화면으로 띄우기.
+
+    var getParameter = function (param) {
+
+        var returnValue;
+        var url = location.href;
+        var parameters = (url.slice(url.indexOf('?') + 1, url.length)).split('&');
+        for (var i = 0; i < parameters.length; i++) {
+            var varName = parameters[i].split('=')[0];
+            if (varName.toUpperCase() == param.toUpperCase()) {
+                returnValue = parameters[i].split('=')[1];
+                return decodeURIComponent(returnValue);
+            }
+        }
+    };
+
+
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+            mapOption = {
+                //   center: new daum.maps.LatLng(getParameter('lat'), getParameter('lng')), // 지도의 중심좌표
+                center: new daum.maps.LatLng(getParameter('lat'), getParameter('lng')),
+                level: 3 // 지도의 확대 레벨
+            };
+
+    // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+    var map = new daum.maps.Map(mapContainer, mapOption);
+
+    var lat= "";
+    var lng= "";
+    var step;
+    
+    daum.maps.event.addListener(map,'click',function(mouseEvent){
+         lat = mouseEvent.latLng.Ab; // lat
+         lng = mouseEvent.latLng.zb; // lng
+        
+
+        console.log("내가 선택한 위도와 경도 : ",lat, lng);
+
+        $("#stepModal").modal('show');
+
+        $("#nonstepMode").on("click",function(){
+            step = false;
+            $("#stepModal").modal('hide');
+            divClear();
+            $("#routeCreateModal").modal('show');
+        });
+
+
+        $("#stepMode").on("click",function(){
+            step = true;
+            $("#stepModal").modal('hide');
+            divClear();
+            $("#routeCreateModal").modal('show');
+        });
+
+
+        function divClear(){
+            $("#routename").val("");
+            $("#password").val("");
+            $("#passwordCheck")[0].checked = false;
+            $(".password").hide();
+        };
+
+    });
+    
+    $("#routeCreateBtn").on("click",function(){
+    	
+        createRoute(lat,lng,step,function(name,password,step,lat,lng,secret){
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://192.168.0.36:8080/route/create',
+                headers:{"Content-Type":"application/json"},
+                data: JSON.stringify({routename:name, password:password, secret:secret, step:step, lat:lat, lng:lng}),
+                dataType:'JSON',
+                success: function(data){
+                	console.log(data);
+            if(step==true){
+                self.location = "stepevent.html?lat="+lat+"&lng="+lng+"&step="+step+"&routeno="+data;
+            }else{
+                self.location = "nonstepevent.html?lat="+lat+"&lng="+lng+"&step="+step+"&routeno="+data+"&routename="+name;
+            }
+                }
+            });//end ajax
+    });//end createRoute
+});//end routeCreateBtn
+
+    function createRoute(lat,lng,step,callback){
+    	
+        var name = $("#routename").val();
+        var step = step;
+        var lat = lat;        
+        var lng = lng;
+        var secret = secret;
+
+        var pass = $("#passwordCheck")[0];
+
+        if(pass.checked == true){
+            // 비밀루트일 때의 처리...
+            var password = $("#password").val();
+            secret = true;
+            if(password == ""){
+                alert('비밀번호를 입력해주세요.');
+                return;
+            }            
+
+            
+            console.log("비밀");
+            console.log(name);
+            console.log(password);
+            console.log(step);
+
+            $("#routeCreateModal").modal('hide');
+
+        }else{
+            // 비밀루트가 아닐 때의 처리...
+            console.log("공개");
+            console.log(name);
+            console.log(step);
+
+            $("#routeCreateModal").modal('hide');
+
+        };
+        callback(name,password,step,lat,lng,secret);
+    };
+
+    $("#passwordCheck").on("click",function(){
+        if(this.checked){
+            $(".password").show();
+        }else{
+            $(".password").hide();
+        }
+    });
+    
+</script>
+</body>
+</html>
