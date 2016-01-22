@@ -471,40 +471,38 @@
     function viewEvent(eventno){
     	$(".uploadedList").html("");
 	  var template2 = Handlebars.compile($("#template").html());
-	  
-
-         $.getJSON("http://192.168.0.36:8080/event/getAttach/" + eventno, function(list) {
-        		 console.log("뷰에서 겟제이슨 들어왔다");
-        		 console.log(list);
-        		 var array = list[0].split(',');
-        		 console.log(array);
-        		 
-        		var length = array.length;
-        		
-        		 for(var i = 0; i < length; i++){
-        			 
-        			var name = array[i];
-        			attach.push(name);
-        			  var fileInfo = getFileInfo(name);
-                      var html = template2(fileInfo);
-        			  
-        			  $(".uploadedList").append(html);
-        		 }
- 
-         });
-         
          
         $.getJSON("http://192.168.0.36:8080/event/view?eventno="+eventno,function(data){
 
             console.log("이벤트 넘버:"+eventno+"읽어오기");
 
             var vo = $(data);
-            console.log(vo);
 
             $("#moeventName").val(vo.attr("title"));
             $("#moeventinfo").val(vo.attr("content"));
             $("#moeventno").val(eventno);
         });
+        
+        $.getJSON("http://192.168.0.36:8080/event/getAttach/" + eventno, function(list) {
+   		 console.log("뷰에서 겟제이슨 들어왔다");
+   		 console.log(list);
+   		 var array = list[0].split(',');
+   		 console.log(array);
+   		 
+   		var length = array.length;
+   		
+   		 for(var i = 0; i < length; i++){
+   			 
+   			var name = array[i];
+   			attach.push(name);
+   			  var fileInfo = getFileInfo(name);
+                 var html = template2(fileInfo);
+   			  
+   			  $(".uploadedList").append(html);
+   		 }
+
+    });
+        
     }
 
     <!-- 이벤트 삭제 기능 -->
@@ -685,7 +683,7 @@
         formData.append("file", file);
 
         $.ajax({
-            url: '/uploadAjax',
+            url: 'http://192.168.0.36:8080/uploadAjax',
             data: formData,
             dataType:'text',
             processData: false,
@@ -742,7 +740,7 @@
                 })(); */
         
         $.ajax({
-            url:"/sboard/deleteFile",
+            url:"http://192.168.0.36:8080/sboard/deleteFile",
             type:"post",
             data: {fileName:$(this).attr("data-src")},
             dataType:"text",

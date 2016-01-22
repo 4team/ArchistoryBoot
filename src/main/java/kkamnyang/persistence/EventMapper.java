@@ -13,5 +13,7 @@ public interface EventMapper extends CRUDMapper<EventVO,Integer> {
 	public List<String> getAttach(Integer eventno) throws Exception;
 	
 	public void attachModify(EventVO vo) throws Exception;
+
+	public void updateAttach(EventVO vo) throws Exception;
 	
 }

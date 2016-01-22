@@ -40,7 +40,7 @@ public class EventService {
 	}
 	
 	public void attachCreate(EventVO vo)throws Exception{
-		System.out.println("?´ë²¤ì„œë¹„ìŠ¤?˜¸ì¶?..");
+		System.out.println("?ï¿½ï¿½ë²¤ì„œë¹„ìŠ¤?ï¿½ï¿½ï¿½?..");
 		mapper.attachCreate(vo);
 	}
 	
@@ -49,7 +49,8 @@ public class EventService {
 	}
 	
 	public void attachModify(EventVO vo)throws Exception{
-		System.out.println("ì²¨ë??ŒŒ?¼?—…?ƒ ?„œë¹„ìŠ¤ ?˜¸ì¶?.....");
-		mapper.attachModify(vo);
+		System.out.println("ì²¨ï¿½??ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ë¹„ìŠ¤ ?ï¿½ï¿½ï¿½?.....");
+		mapper.update(vo);
+		mapper.updateAttach(vo);
 	}
 }
