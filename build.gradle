@@ -35,11 +35,10 @@ configurations {
 dependencies { 
 	//Basic
 	compile("org.springframework.boot:spring-boot-starter-web") 
-	compile('tomcat:jasper-compiler:5.5.23')
-	compile('javax.servlet:javax.servlet-api:3.1.0')
+	providedRuntime('org.apache.tomcat.embed:tomcat-embed-jasper')
+//	compile('javax.servlet:javax.servlet-api:3.1.0')
 	compile("javax.servlet:jstl:1.2")
 	compile('javax.persistence:persistence-api:1.0.2')
-	compile('org.freemarker:freemarker:2.3.23')
 	
 	//Database
 	compile('org.springframework:spring-jdbc:4.2.4.RELEASE')
@@ -48,13 +47,11 @@ dependencies {
 	compile('org.mybatis:mybatis:3.3.0')
 	compile('org.mybatis:mybatis-spring:1.2.3')
 	compile('commons-dbcp:commons-dbcp:1.4')
-	compile('com.h2database:h2:1.4.190')
-
 
 	//Test	
 	compile('junit:junit:4.12')
 	testCompile("org.springframework.boot:spring-boot-starter-test") 
-		
+
 	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat") 
 	providedRuntime("org.springframework.boot:spring-boot-starter-security") 
 	
@@ -63,7 +60,7 @@ dependencies {
 	compile('org.springframework.security:spring-security-core:4.0.3.RELEASE')
 	compile('org.springframework.security:spring-security-web:4.0.3.RELEASE')
 	compile('org.springframework.security:spring-security-config:4.0.3.RELEASE')
-	compile('org.springframework.security:spring-security-taglibs:4.0.3.RELEASE')
+//	compile('org.springframework.security:spring-security-taglibs:4.0.3.RELEASE')
 	
 	//Social
 	compile('org.springframework.social:spring-social-security:1.1.4.RELEASE')

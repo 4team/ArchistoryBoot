@@ -1,11 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page session="false"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" charset=UTF-8">
     <title> = Archistory = </title>
 </head>
 
@@ -170,17 +166,19 @@
 		}
     </style>
     
-    <script src="/Cesium/js/jquery.js"></script>
+    <script  src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
 
     <!-- 합쳐지고 최소화된 최신 CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <!-- 부가적인 테마 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap%2Emin.js"></script>
     
     <!-- Cesium -->
-  	<link href="/Cesium/Build/Cesium/Widgets/widgets.css" rel="stylesheet"/>
+  	<link type="text/css" href="/Cesium/Build/Cesium/Widgets/widgets.css" rel="stylesheet"/>
 	<script src="/Cesium/Build/Cesium/Cesium.js"></script>
 	
 <body>
@@ -317,7 +315,7 @@
 <div id="myLocation"><span class="glyphicon glyphicon-map-marker"></span></div>
 
 <!-- Cesium 초기화 및 이벤트를 위한 스크립트 -->
-<script>
+<script type="text/javascript">
 var viewer;
 
 
@@ -427,7 +425,7 @@ $.getJSON("http://192.168.0.36:8080/route/listAll",function(data){
 </script>
 
 <!-- 클릭 메뉴들과 관련된 스크립트 -->
-<script>
+<script type="text/javascript">
 	
 
 $("#mDrop").on("click",function(){
@@ -454,6 +452,6 @@ $("#loginBtn").on("click",function(){
     });
 
 </script>
-<script src="/Cesium/js/map.js"></script>
+<script  src="/js/map.js"></script>
 </body>
 </html>
