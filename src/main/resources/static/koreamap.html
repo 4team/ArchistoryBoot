@@ -160,12 +160,12 @@
     });
     
     $("#routeCreateBtn").on("click",function(){
-    	
         createRoute(lat,lng,step,function(name,password,step,lat,lng,secret){
+    	console.log("내가 생성할 루트 정보: "+name,password,step,lat,lng,secret);
 
             $.ajax({
                 type: 'POST',
-                url: 'http://14.32.66.127:1524/route/create',
+                url: 'http://14.32.66.127:4000/route/create',
                 headers:{"Content-Type":"application/json"},
                 data: JSON.stringify({routename:name, password:password, secret:secret, step:step, lat:lat, lng:lng}),
                 dataType:'JSON',

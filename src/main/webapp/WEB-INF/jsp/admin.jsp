@@ -452,7 +452,7 @@ function addMarker(route){
 
 
 
-$.getJSON("http://192.168.0.36:8080/route/listAll",function(data){
+$.getJSON("http://14.32.66.127:4000/route/listAll",function(data){
     var list = $(data);
     console.log(data);
     list.each(function(idx,value){
@@ -488,7 +488,7 @@ $("#main").on("mouseover",function(){
 	    }
 
 	    function getAllRouteList(){
-		    $.getJSON("http://192.168.0.36:8080/route/list?adminno="+adminno,function(data){
+		    $.getJSON("http://14.32.66.127:4000/route/list?adminno="+adminno,function(data){
 		        var list = $(data);
 	
 				routeLi = "";
@@ -548,7 +548,7 @@ $("#main").on("mouseover",function(){
 
 
 		    function viewRoute(routeno){
-		            $.getJSON("http://192.168.0.36:8080/route/view?routeno="+routeno,function(data){
+		            $.getJSON("http://14.32.66.127:4000/route/view?routeno="+routeno,function(data){
 		                console.log("루트 넘버:"+routeno+"읽어오기");
 
 		                var vo = $(data);
@@ -589,7 +589,7 @@ $("#main").on("mouseover",function(){
 
 		        $.ajax({
 		            type:"post",
-		            url: "http://192.168.0.36:8080/route/remove",
+		            url: "http://14.32.66.127:4000/route/remove",
 		            headers : {"Access-Control-Allow-Origin":"*","Content-Type":"application/json","X-CSRF-TOKEN":getMetaContentByName('_csrf')},
 		            dataType: "json",
 		            data : JSON.stringify({routeno:routeno}),
@@ -663,7 +663,7 @@ $("#main").on("mouseover",function(){
 			 */
 			   $.ajax({
 				  type:'post',
-				  url:"http://192.168.0.36:8080/admin/login_success/member/register",
+				  url:"http://14.32.66.127:4000/admin/login_success/member/register",
 				  headers : {
 					"Content-Type" : "application/json"  
 				  },

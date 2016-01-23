@@ -418,7 +418,7 @@ function addMarker(route){
 
 
 
-$.getJSON("http://192.168.0.36:8080/route/listAll",function(data){
+$.getJSON("http://14.32.66.127:4000/route/listAll",function(data){
     var list = $(data);
     console.log(data);
     list.each(function(idx,value){
