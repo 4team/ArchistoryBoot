@@ -62,6 +62,11 @@
         height:33px;
         float:left;
     }
+    #moorder{
+        width:33px;
+        height:33px;
+        float:left;
+    }
     #eventName{
         width:420px;
     }
@@ -409,6 +414,7 @@
             console.log("attach2:" + attach2);
             clearEventDiv();
         	attach = [];
+        	eventno++;
         });
 
         $("#eventModal").modal('hide');
@@ -481,7 +487,7 @@
 
             $("#moeventName").val(vo.attr("title"));
             $("#moeventinfo").val(vo.attr("content"));
-            $("#moeventno").val(eventno);
+            $("#moorder").val(eventno);
         });
         
         $.getJSON("http://14.32.66.127:4000/event/getAttach/" + eventno, function(list) {
