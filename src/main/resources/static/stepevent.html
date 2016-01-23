@@ -347,7 +347,7 @@
     <!-- 이벤트 리스트 불러오기-->
 
     function getEventList(){
-        $.getJSON("http://192.168.0.36:8080/event/elist?routeno="+routeno,function(data){
+        $.getJSON("http://14.32.66.127:1524/event/elist?routeno="+routeno,function(data){
 
             var list = $(data);
             console.log(list);
@@ -446,7 +446,7 @@
 
         $.ajax({
             type:'post',
-            url:"http://192.168.0.36:8080/event/attachCreate",
+            url:"http://14.32.66.127:1524/event/attachCreate",
             headers: {
                 "Content-Type":"application/json"},
             datatype: "json",
@@ -473,7 +473,7 @@
     	$(".uploadedList").html("");
 	  var template2 = Handlebars.compile($("#template").html());
          
-        $.getJSON("http://192.168.0.36:8080/event/view?eventno="+eventno,function(data){
+        $.getJSON("http://14.32.66.127:1524/event/view?eventno="+eventno,function(data){
 
             console.log("이벤트 넘버:"+eventno+"읽어오기");
 
@@ -484,7 +484,7 @@
             $("#moeventno").val(eventno);
         });
         
-        $.getJSON("http://192.168.0.36:8080/event/getAttach/" + eventno, function(list) {
+        $.getJSON("http://14.32.66.127:1524/event/getAttach/" + eventno, function(list) {
    		 console.log("뷰에서 겟제이슨 들어왔다");
    		 console.log(list);
    		 var array = list[0].split(',');
@@ -512,7 +512,7 @@
 
         $.ajax({
             type:'post',
-            url:"http://192.168.0.36:8080/event/remove",
+            url:"http://14.32.66.127:1524/event/remove",
             headers:{
                 "Content-Type":"application/json"},
             datatype: "json",
@@ -534,7 +534,7 @@
 
         $.ajax({
             type:'post',
-            url:"http://192.168.0.36:8080/event/attachModify",
+            url:"http://14.32.66.127:1524/event/attachModify",
             headers:{
                 "Content-Type" :"application/json"	},
             datatype : "json",
@@ -677,50 +677,63 @@
         event.preventDefault();
 
         var files = event.originalEvent.dataTransfer.files;
-        var file = files[0];
+        console.log(files);
+        var num = files.length;
+
+		
+		for(var i = 0 ; i < num; i++){
+	        var file = files[i];
+	        console.log(file);
+	        
+	        var formData = new FormData();
+	        formData.append("file", file);
+	        
+	        uploadImg(formData);
+		}
+		
+		function uploadImg(formData){
+	        $.ajax({
+	            url: 'http://14.32.66.127:1524/uploadAjax',
+	            data: formData,
+	            dataType:'text',
+	            processData: false,
+	            contentType: false,
+	            type: 'POST',
+	            success: function(data){
+	
+	                var fileInfo = getFileInfo(data);
+	                var html = template(fileInfo);
+	
+	                var str ="";
+	
+	                console.log(data);
+	                //console.log(checkImageType(data));
+	                //console.log("ddddd",$(".uploadedList"));
+	
+	                //attach.push(checkImageType(data).input.substring(checkImageType(data).input.length-15,checkImageType(data).input.length));
+	                attach.push(data);
+	                console.log("attach:" + attach);
+	                
+	                if(checkImageType(data)){
+	                    str ="<div class='img'>"
+	                            +"<a href='http://14.32.66.127:1524/displayFile?fileName="+getImageLink(data)+"'><img src='http://14.32.66.127:1524/displayFile?fileName="+data+"'/></a>"
+	                            +"<small data-src='"+data+"'><div class='x'>X</div></small><input type='hidden' name='files' value='"+data+"'>"
+	                            +"</div>";
+	
+	                }else{
+	                    str = "<div class='img'>"
+	                            +"<a href='http://14.32.66.127:1524/displayFile?fileName="+data+"'>"+ getOriginalName(data)+"</a>"
+	                            +"<small data-src='"+data+"'><div class='x'>X</div></small><input type='hidden' name='files' value='"+data+"'>"
+	                            +"</div>";
+	                }
+	                $(".uploadedList").append(str);
+	
+	            }
+	        });
+		}
+	
         
-        
-        var formData = new FormData();
-        formData.append("file", file);
-
-        $.ajax({
-            url: 'http://192.168.0.36:8080/uploadAjax',
-            data: formData,
-            dataType:'text',
-            processData: false,
-            contentType: false,
-            type: 'POST',
-            success: function(data){
-
-                var fileInfo = getFileInfo(data);
-                var html = template(fileInfo);
-
-                var str ="";
-
-                console.log(data);
-                //console.log(checkImageType(data));
-                //console.log("ddddd",$(".uploadedList"));
-
-                //attach.push(checkImageType(data).input.substring(checkImageType(data).input.length-15,checkImageType(data).input.length));
-                attach.push(data);
-                console.log("attach:" + attach);
-                
-                if(checkImageType(data)){
-                    str ="<div class='img'>"
-                            +"<a href='http://192.168.0.36:8080/displayFile?fileName="+getImageLink(data)+"'><img src='http://192.168.0.36:8080/displayFile?fileName="+data+"'/></a>"
-                            +"<small data-src='"+data+"'><div class='x'>X</div></small><input type='hidden' name='files' value='"+data+"'>"
-                            +"</div>";
-
-                }else{
-                    str = "<div class='img'>"
-                            +"<a href='http://192.168.0.36:8080/displayFile?fileName="+data+"'>"+ getOriginalName(data)+"</a>"
-                            +"<small data-src='"+data+"'><div class='x'>X</div></small><input type='hidden' name='files' value='"+data+"'>"
-                            +"</div>";
-                }
-                $(".uploadedList").append(str);
-
-            }
-        });
+	
     });
 
     $(".uploadedList").on("click", "small", function(event){
@@ -734,7 +747,7 @@
 
         
         $.ajax({
-            url:"http://192.168.0.36:8080/sboard/deleteFile",
+            url:"http://14.32.66.127:1524/sboard/deleteFile",
             type:"post",
             data: {fileName:$(this).attr("data-src")},
             dataType:"text",
